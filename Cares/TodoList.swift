@@ -59,4 +59,16 @@ class TodoList {
             NSUserDefaults.standardUserDefaults().setObject(todoItems, forKey: ITEMS_KEY) // save/overwrite todo item list
         }
     }
+    
+    func scheduleReminderforItem(item: TodoItem) {
+        var notification = UILocalNotification() // create a new reminder notification
+        notification.alertBody = "Reminder: Todo Item \"\(item.title)\" Is Overdue" // text that will be displayed in the notification
+        notification.alertAction = "open" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+        notification.fireDate = NSDate().dateByAddingTimeInterval(30 * 60) // 30 minutes from current time
+        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+        notification.userInfo = ["title": item.title, "UUID": item.UUID] // assign a unique identifier to the notification that we can use to retrieve it later
+        notification.category = "TODO_CATEGORY"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
 }
