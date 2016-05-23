@@ -23,14 +23,22 @@ class MapkitViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         mapView.delegate = self
         
         let locations = [
-            ["name" : "Apple Inc.",
-                "latitude" : 37.33187,
-                "longitude" : -122.02951,
-                "mediaURL" : "http://www.apple.com"],
-            ["name" : "BJ's Restaurant & Brewhouse",
-                "latitude" : 37.33131,
-                "longitude" : -122.03175,
-                "mediaURL" : "http://www.bjsrestaurants.com"]
+            ["name" : "โรงพยาบาลบางกรวย",
+                "latitude" : 13.804707597,
+                "longitude" : 100.47217239,
+                "Address" : "44 ม.8 ถ.กรุงนนท์-วงถนอม ต.วัดชลอ อ.บางกรวย จ.นนทบุรี 11130"],
+            ["name" : "สถานพยาบาลรวมแพทย์",
+                "latitude" : 8.1016815222,
+                "longitude" : 98.91107521,
+                "Address" : "529 ถ.อุตรกิจ ต.กระบี่ใหญ่ อ.เมือง จ.กระบี่ 81000"],
+            ["name" : "โรงพยาบาลนนทเวช",
+                "latitude" : 13.856493853,
+                "longitude" : 100.54132905,
+                "Address" : "30/8 ม.2 ถ.งามวงศ์วาน ต.บางเขน อ.เมือง จ.นนทบุรี 11000"],
+            ["name" : "โรงพยาบาลสมิติเวช",
+                "latitude" : 13.734755,
+                "longitude" : 100.576859,
+                "Address" : "133 ซ.สุขุมวิท 49 แขวงคลองตันเหนือ เขตวัฒนา กทม. 10110"]
         ]
         
         var annotations = [MKPointAnnotation]()
@@ -39,15 +47,15 @@ class MapkitViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             let longitude = CLLocationDegrees(dictionary["longitude"] as! Double)
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let name = dictionary["name"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
+            let address = dictionary["Address"] as! String
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(name)"
-            annotation.subtitle = mediaURL
+            annotation.subtitle = address
             annotations.append(annotation)
         }
         mapView.addAnnotations(annotations)
-        centerMapOnLocation(annotations[0], regionRadius: 1000.0)
+        centerMapOnLocation(annotations[0], regionRadius: 1000000.0)
         
         //location
         /*self.locationManager.delegate = self
